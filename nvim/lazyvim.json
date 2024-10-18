@@ -1,0 +1,10 @@
+{
+  "extras": [
+    "lazyvim.plugins.extras.lang.clangd",
+    "lazyvim.plugins.extras.lang.rust"
+  ],
+  "news": {
+    "NEWS.md": "4964"
+  },
+  "version": 4
+}
