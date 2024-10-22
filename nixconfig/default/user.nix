@@ -45,6 +45,8 @@
     cht-sh    # Cheat sheets
     p7zip
     file
+    man-pages
+    man-pages-posix
 
     # Fonts
     victor-mono
