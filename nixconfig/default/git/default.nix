@@ -15,4 +15,8 @@
     };
     lfs.enable = true;
   };
+
+  home.packages = with pkgs; [
+    pre-commit
+  ];
 }

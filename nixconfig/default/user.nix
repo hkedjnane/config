@@ -43,6 +43,9 @@
     onefetch  # neofetch for git repos
     ncdu      # Disk usage explorer
     cht-sh    # Cheat sheets
+    pamixer   # PulseAudio mixer
+    playerctl # Media player control
+    sshfs     # mount a remote ssh directory locally
     p7zip
     file
     man-pages
@@ -53,6 +56,8 @@
     hack-font
     nerdfonts
     jetbrains-mono
+    fantasque-sans-mono
+    font-awesome
 
     # Desktop utilities
     pavucontrol # Sound control
@@ -126,6 +131,16 @@
     ./git
 
     # Window manager
-    ./sway
+    ./hyprland
+
+    # Bar
+    ./swaybar
+
+    # App menu
+    ./wofi
+
+    # Notification daemon
+    ./mako
   ];
+
 }

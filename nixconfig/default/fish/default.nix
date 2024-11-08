@@ -28,6 +28,7 @@ in
       gpf = "git push --force-with-lease";
       gti = "git";
       sl = "ls";
+      gitroot = ''cd "$(git rev-parse --show-toplevel)"'';
     };
 
     functions = {

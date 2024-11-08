@@ -17,8 +17,8 @@ in
   imports =
     [ # Include the results of the hardware scan.
      ./hardware-configuration.nix
-     # ./default/system.nix
-     <nixos-hardware/lenovo/thinkpad/t14/amd/gen3>
+     ./default/system.nix
+     <nixos-hardware/lenovo/thinkpad/t14/amd/gen4>
    ];
 
   # Bootloader.
@@ -84,8 +84,8 @@ in
   };
 
   # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  # services.xserver.displayManager.gdm.enable = true;
+  # services.xserver.desktopManager.gnome.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.harsane = {
@@ -96,12 +96,12 @@ in
   };
 
   # Enable automatic login for the user.
-  services.xserver.displayManager.autoLogin.enable = true;
-  services.xserver.displayManager.autoLogin.user = "harsane";
+  # services.xserver.displayManager.autoLogin.enable = true;
+  # services.xserver.displayManager.autoLogin.user = "harsane";
 
   # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
-  systemd.services."getty@tty1".enable = false;
-  systemd.services."autovt@tty1".enable = false;
+  # systemd.services."getty@tty1".enable = false;
+  # systemd.services."autovt@tty1".enable = false;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
