@@ -1,7 +1,5 @@
 {pkgs, lib, config, ...}:
-let
-in
-{
+lib.mkIf (!config.remote) {
     wayland.windowManager.hyprland = {
         enable = true;
         # Basic configuration

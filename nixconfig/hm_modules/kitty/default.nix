@@ -1,5 +1,5 @@
-{config, pkgs, ...}:
-{
+{config, pkgs, lib, ...}:
+lib.mkIf (!config.remote) {
 
   home.sessionVariables = {
     TERM = "kitty";

@@ -1,8 +1,5 @@
-{
-  pkgs,
-  ...
-}:
-{
+{ config, pkgs, lib, ... }:
+lib.mkIf (!config.remote) {
   services.greetd = {
     enable = true;
     settings = {

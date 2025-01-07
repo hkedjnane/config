@@ -1,6 +1,6 @@
 {config, pkgs, ... }:
-{
-  home.packages = with pkgs; [
+let
+  graphical = with pkgs; [
     # Browser
     firefox
     google-chrome
@@ -22,6 +22,19 @@
 
     # VPN
     protonvpn-gui
+
+    # Desktop utilities
+    pavucontrol # Sound control
+
+    # Entertainment
+    prismlauncher
+    osu-lazer
+  ];
+in {
+
+  home.packages = with pkgs; [
+
+    # VPN
     protonvpn-cli
 
     # CLI utilities
@@ -59,23 +72,18 @@
     fantasque-sans-mono
     font-awesome
 
-    # Desktop utilities
-    pavucontrol # Sound control
-
-    # Entertainment
-    prismlauncher
-    osu-lazer
 
     # Humorous
     lolcat
 
     # Others
     bitwarden
-  ];
+  ] ++ (if config.remote then [] else graphical);
+
 
   # Media controls daemon
   services.playerctld = {
-    enable = true;
+    enable = !config.remote;
     package = pkgs.playerctl;
   };
 
@@ -93,7 +101,7 @@
   };
 
   # Enables KDEConnect
-  services.kdeconnect.enable = true;
+  services.kdeconnect.enable = !config.remote;
 
   # Enable fontconfig
   fonts.fontconfig.enable = true;
@@ -109,26 +117,14 @@
   # `bash -c "$(curl -fsSL https://raw.githubusercontent.com/JackHack96/PulseEffects-Presets/master/install.sh)"`
   # to grab some presets.
   services.easyeffects = {
-    enable = true;
+    enable = !config.remote;
     preset = "Laptop";
   };
 
-  # Sets the default shell to 
-  #users.users.shell = pkgs.zsh;
 
   imports = [
-    # Shells
-    ./fish
-
     # Terminal
     ./kitty
-
-    # Editors
-    ./nvim
-    ./helix
-
-    # Tools
-    ./git
 
     # Window manager
     ./hyprland
@@ -141,6 +137,16 @@
 
     # Notification daemon
     ./mako
+
+    # Shells
+    ./fish
+
+    # Editors
+    ./nvim
+    ./helix
+
+    # Tools
+    ./git
   ];
 
 }

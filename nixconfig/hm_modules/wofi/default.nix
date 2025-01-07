@@ -1,5 +1,5 @@
 {pkgs, lib, config, ...}:
-{
+lib.mkIf (!config.remote) {
   programs.wofi = {
       enable = true;
       style = builtins.readFile ./style.css;
