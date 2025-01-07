@@ -6,7 +6,7 @@
     };
 
     settings = {
-      theme = "catppuccin_frappe";
+      theme = if config.darkmode then "catppuccin_frappe" else "catppuccin_latte";
 
       editor = {
         line-number = "relative";
@@ -19,4 +19,8 @@
       };
     };
   };
+
+  home.activation.reloadHelix = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    run ${pkgs.procps + "/bin/pkill"} -USR1 hx
+  '';
 }

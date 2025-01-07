@@ -45,6 +45,75 @@ in
     consoleLogLevel = 0;
     kernelParams = [ "quiet" "udev.log_level=0" ];
   };
+
+  services.thinkfan = {
+    enable = true;
+    levels = [
+      [
+        0
+        0
+        55
+      ]
+      [
+        1
+        55
+        60
+      ]
+      [
+        2
+        60
+        65
+      ]
+      [
+        3
+        65
+        70
+      ]
+      [
+        6
+        70
+        75
+      ]
+      [
+        7
+        75
+        80
+      ]
+      [
+        "level auto"
+        80
+        32767
+      ]
+    ];
+  };
+
+  systemd.services.thinkfan.preStart = "
+    /run/current-system/sw/bin/modprobe  -r thinkpad_acpi && /run/current-system/sw/bin/modprobe thinkpad_acpi
+  ";
+
+
+  swapDevices = [ 
+    {
+      device = "/var/lib/swapfile";
+      size = 16*1024;
+    }
+  ];
+
+  services.tlp.enable = false;
+
+  services.auto-cpufreq.enable = true;
+  services.auto-cpufreq.settings = {
+    battery = {
+      governor = "powersave";
+      turbo = "never";
+    };
+    charger = {
+      governor = "performance";
+      turbo = "auto";
+    };
+  };
+
+
   systemd.network.wait-online.enable = false;
   boot.initrd.systemd.network.wait-online.enable = false;
 
@@ -116,6 +185,10 @@ in
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  hardware.bluetooth.enable = true; # enables support for Bluetooth
+  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
+  services.blueman.enable = true;
+
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -124,19 +197,14 @@ in
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
   };
 
   hardware.opengl.enable = true;
 
 
+
   nix = {
-    package = pkgs.nixFlakes;
+    package = pkgs.nixVersions.stable;
     extraOptions = ''
       experimental-features = nix-command flakes
       keep-outputs = true

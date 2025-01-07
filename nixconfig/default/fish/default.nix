@@ -1,4 +1,4 @@
-{config, pkgs, ...}:
+{config, pkgs, lib, ...}:
 let
 catppuccin-fish = pkgs.fetchFromGitHub { 
   owner = "catppuccin"; 
@@ -6,10 +6,12 @@ catppuccin-fish = pkgs.fetchFromGitHub {
   rev = "HEAD"; 
   hash = "sha256-Dc/zdxfzAUM5NX8PxzfljRbYvO9f9syuLO8yBr+R3qg="; 
 }; 
+  theme = if config.darkmode then "Frappe" else "Latte";
 in 
 {
-
-  xdg.configFile."fish/themes/Catppuccin Frappe.theme".source = "${catppuccin-fish}/themes/Catppuccin Frappe.theme"; 
+  xdg.configFile."fish/themes/my_theme.theme".source = "${catppuccin-fish}/themes/Catppuccin ${theme}.theme"; 
+  xdg.configFile."fish/themes/dark.theme".source = "${catppuccin-fish}/themes/Catppuccin Frappe.theme"; 
+  xdg.configFile."fish/themes/light.theme".source = "${catppuccin-fish}/themes/Catppuccin Latte.theme"; 
   programs.fish = {
     enable = true;
     shellAliases = {
@@ -37,10 +39,15 @@ in
       fdevelop = ''nix develop -c fish $argv'';
       posix = ''bash -c "$argv"'';
       d = ''$argv & disown'';
+      fish_greeting = ''pokedex'';
+      reload-config = {
+          onVariable = "_reload_config";
+          body = "source ~/.config/fish/config.fish && fish_config theme choose 'my_theme'";
+      };
     };
 
     interactiveShellInit = ''
-      fish_config theme choose Catppuccin\ Frappe
+      reload-config
     '';
 
     plugins = [
@@ -65,9 +72,13 @@ in
     ];
   };
 
+  home.activation.reloadFish = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    run ${pkgs.fish}/bin/fish -c 'set -U _reload_config $(random)'
+  '';
+
   programs.starship =
       let
-        flavour = "frappe"; # One of `latte`, `frappe`, `macchiato`, or `mocha`
+        flavour = pkgs.lib.strings.toLower theme; # One of `latte`, `frappe`, `macchiato`, or `mocha`
       in
       {
         enable = true;
@@ -87,4 +98,8 @@ in
               sha256 = "sha256-nsRuxQFKbQkyEI4TXgvAjcroVdG+heKX5Pauq/4Ota0=";
             } + /starship.toml));
       };
+
+      home.packages = with pkgs; [
+        krabby
+      ];
 }

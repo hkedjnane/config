@@ -12,7 +12,7 @@
       package = pkgs.hack-font;
       name = "Hack";
     };
-    themeFile = "Catppuccin-Frappe";
+    themeFile = if config.darkmode then "Catppuccin-Frappe" else "Catppuccin-Latte";
 
     settings = {
       confirm_os_window_close = 0;

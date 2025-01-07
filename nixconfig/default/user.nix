@@ -6,7 +6,7 @@
     google-chrome
 
     # Communications
-    discord 
+    vesktop
     slack
     thunderbird #Email client
 

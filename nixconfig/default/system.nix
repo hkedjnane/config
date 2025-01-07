@@ -12,7 +12,7 @@
   # Steam is weird so it has to be installed by the system
   # programs.steam.enable = true;
 
-  services.gnome.gnome-keyring.enable = true;
+  # services.gnome.gnome-keyring.enable = true;
 
   programs.dconf.enable = true;
 

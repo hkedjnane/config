@@ -1,5 +1,4 @@
 { config, pkgs, ... }:
-
 {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -25,5 +24,5 @@
   # Font configuration
   fonts.fontconfig.enable = true;
 
-  imports = [ ./default/user.nix ];
+  imports = [ ./variables.nix ./default/user.nix ];
 }
