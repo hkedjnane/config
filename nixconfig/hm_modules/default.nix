@@ -78,7 +78,7 @@ in {
 
     # Others
     bitwarden
-  ] ++ (if config.remote then [] else graphical);
+  ] ++ (if config.remote then [] else graphical) ++ (if config.sync then [syncthing] else []);
 
 
   # Media controls daemon

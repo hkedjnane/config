@@ -14,7 +14,7 @@ catppuccin-plymouth = pkgs.catppuccin-plymouth.override { variant = "frappe"; };
 in
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [ # Include thm results of the hardware scan.
      ./hardware-configuration.nix
      ./variables.nix
      # Picked configuration, switch to another one if needed

@@ -8,5 +8,6 @@
     managePower = mkOption { type = bool; default = true; };
     hostname = mkOption { type = str; default = "nixos"; };
     userList = mkOption { type = attrs; default = {}; };
+    sync = mkOption { type = bool; default = false; };
   };
 }
