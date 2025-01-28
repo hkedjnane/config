@@ -19,6 +19,7 @@ in
      ./variables.nix
      # Picked configuration, switch to another one if needed
      ./configs/thinkpad.nix
+     ./configs/thinkpad_imports.nix
      ./sys_modules
    ];
 
@@ -60,13 +61,6 @@ in
   systemd.network.wait-online.enable = false;
   boot.initrd.systemd.network.wait-online.enable = false;
 
-  networking = {
-    hostName = config.hostname;
-    networkmanager.enable = true;
-    nameservers = [ "1.1.1.1" "1.0.0.1" "8.8.8.8" ];
-    dhcpcd.extraConfig = "nohook resolv.conf";
-    networkmanager.dns = "none";
-  };
 
   # Set your time zone.
   time.timeZone = "Europe/Paris";
@@ -102,6 +96,14 @@ in
       binary-caches = https://cache.nixos.org
       trusted-binary-caches = https://cache.nixos.org
     '';
+
+  optimise.automatic = true;
+
+  gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 30d";
+  };
 };
 
   security.polkit.enable = true;
@@ -109,7 +111,6 @@ in
 
   programs.kdeconnect.enable = !config.remote;
 
-  programs.steam.enable = !config.remote;
   programs.fish.enable = true;
   users.defaultUserShell = pkgs.fish;
 

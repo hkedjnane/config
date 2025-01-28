@@ -21,6 +21,8 @@
     ./bluetooth
     ./sound
     ./power
+    ./networking
+    ./gaming
   ];
 
 }

@@ -39,15 +39,15 @@ in
       fdevelop = ''nix develop -c fish $argv'';
       posix = ''bash -c "$argv"'';
       d = ''$argv & disown'';
-      fish_greeting = ''pokedex'';
       reload-config = {
           onVariable = "_reload_config";
           body = "source ~/.config/fish/config.fish && fish_config theme choose 'my_theme'";
       };
+      fish_greeting = '''';
     };
 
     interactiveShellInit = ''
-      reload-config
+      fish_config theme choose 'my_theme'
     '';
 
     plugins = [
@@ -99,7 +99,4 @@ in
             } + /starship.toml));
       };
 
-      home.packages = with pkgs; [
-        krabby
-      ];
 }

@@ -24,5 +24,5 @@
   # Font configuration
   fonts.fontconfig.enable = true;
 
-  imports = [ ./variables.nix ./hm_modules ];
+  imports = [ ./variables.nix ./configs/thinkpad.nix ./hm_modules ];
 }

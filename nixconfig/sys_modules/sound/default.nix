@@ -1,7 +1,7 @@
 {config, pkgs, lib, ...}:
 lib.mkIf (!config.remote) {
+
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;

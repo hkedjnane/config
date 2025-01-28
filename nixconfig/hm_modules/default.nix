@@ -25,6 +25,7 @@ let
 
     # Desktop utilities
     pavucontrol # Sound control
+    dolphin
 
     # Entertainment
     prismlauncher
@@ -35,7 +36,7 @@ in {
   home.packages = with pkgs; [
 
     # VPN
-    protonvpn-cli
+    protonvpn-cli_2
 
     # CLI utilities
     wget      # File downloading
@@ -78,7 +79,7 @@ in {
 
     # Others
     bitwarden
-  ] ++ (if config.remote then [] else graphical) ++ (if config.sync then [syncthing] else []);
+  ] ++ (lib.optionals (!config.remote) graphical) ++ (lib.optionals config.sync [syncthing]);
 
 
   # Media controls daemon
@@ -147,6 +148,8 @@ in {
 
     # Tools
     ./git
+
+    ./gaming
   ];
 
 }

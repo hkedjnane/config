@@ -17,6 +17,11 @@ lib.mkIf (!config.remote) {
     home.packages = with pkgs; [
       swaybg
       hyprshot
+      acpi
     ];
+
+    home.sessionVariables = {
+        HYPRSHOT_DIR = "$HOME/Pictures/Screenshots";
+    };
 
 }
