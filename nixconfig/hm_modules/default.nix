@@ -27,10 +27,7 @@ let
     pavucontrol # Sound control
     dolphin
 
-    # Entertainment
-    prismlauncher
-    osu-lazer
-  ];
+  ] ++ (lib.optionals (config.gaming) [prismlauncher osu-lazer]);
 in {
 
   home.packages = with pkgs; [

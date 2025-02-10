@@ -6,6 +6,8 @@
     manageBoot = true;
     managePower = true;
     sync = true;
+    gaming = true;
+    swapfile_gb = 16;
     hostname = "nixos";
     userList = {
       harsane = {

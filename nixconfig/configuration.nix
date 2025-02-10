@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 let
 catppuccin-grub = pkgs.fetchFromGitHub {
     owner = "catppuccin";
@@ -51,10 +51,10 @@ in
     kernelParams = [ "quiet" "udev.log_level=0" ];
   };
 
-  swapDevices = [ 
+  swapDevices = lib.optionals (config.swapfile_gb != 0) [
     {
       device = "/var/lib/swapfile";
-      size = 16*1024;
+      size = config.swapfile_gb * 1024;
     }
   ];
 

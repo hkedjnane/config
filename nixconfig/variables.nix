@@ -9,5 +9,7 @@
     hostname = mkOption { type = str; default = "nixos"; };
     userList = mkOption { type = attrs; default = {}; };
     sync = mkOption { type = bool; default = false; };
+    gaming = mkOption { type = bool; default = false; };
+    swapfile_gb = mkOption { type = int; default = 16; };
   };
 }
