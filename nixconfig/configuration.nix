@@ -18,8 +18,8 @@ in
      ./hardware-configuration.nix
      ./variables.nix
      # Picked configuration, switch to another one if needed
-     ./configs/thinkpad.nix
-     ./configs/thinkpad_imports.nix
+     ./configs/thinkpad/system.nix
+     ./configs/thinkpad/imports.nix
      ./sys_modules
    ];
 
