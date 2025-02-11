@@ -24,5 +24,5 @@
   # Font configuration
   fonts.fontconfig.enable = true;
 
-  imports = [ ./variables.nix ./configs/thinkpad/harsane.nix ./hm_modules ];
+  imports = [ ./variables.nix ./configs/path/to/config.nix ./hm_modules ];
 }

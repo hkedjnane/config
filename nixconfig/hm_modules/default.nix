@@ -27,7 +27,7 @@ let
     pavucontrol # Sound control
     dolphin
 
-  ] ++ (lib.optionals (config.gaming) [prismlauncher osu-lazer]);
+  ] ++ (lib.optionals (config.gaming) [prismlauncher osu-lazer]) ++ (lib.optionals (config.stockly) [jetbrains.datagrip]);
 in {
 
   home.packages = with pkgs; [
@@ -42,6 +42,7 @@ in {
     xsel      # Clipboard manager
     tree      # Tree-like file display
     htop      # Task Manager
+    btop      # Better Task Manager
     zip       # ZIP creation
     unzip     # ZIP decompression
     ripgrep   # Supercharged grep

@@ -11,5 +11,7 @@
     sync = mkOption { type = bool; default = false; };
     gaming = mkOption { type = bool; default = false; };
     swapfile_gb = mkOption { type = int; default = 16; };
+    stockly = mkOption { type = bool; default = false; };
+    git = mkOption { type = attrs; default = {}; };
   };
 }
