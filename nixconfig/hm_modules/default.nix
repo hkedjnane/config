@@ -24,10 +24,12 @@ let
     protonvpn-gui
 
     # Desktop utilities
-    pavucontrol # Sound control
+    pavucontrol   # Sound control
     dolphin
+    filezilla     # (S)FTP Client
+    nwg-displays  # Monitor management
 
-  ] ++ (lib.optionals (config.gaming) [prismlauncher osu-lazer]) ++ (lib.optionals (config.stockly) [jetbrains.datagrip]);
+  ] ++ (lib.optionals (config.gaming) [prismlauncher osu-lazer]);
 in {
 
   home.packages = with pkgs; [
@@ -38,7 +40,7 @@ in {
     # CLI utilities
     wget      # File downloading
     curl      # File downloading
-    lf        # File exploration
+    yazi        # File exploration
     xsel      # Clipboard manager
     tree      # Tree-like file display
     htop      # Task Manager
@@ -75,7 +77,7 @@ in {
     # Humorous
     lolcat
 
-    # Others
+    # Password management
     bitwarden
   ] ++ (lib.optionals (!config.remote) graphical) ++ (lib.optionals config.sync [syncthing]);
 
@@ -120,7 +122,6 @@ in {
     preset = "Laptop";
   };
 
-
   imports = [
     # Terminal
     ./kitty
@@ -129,7 +130,6 @@ in {
     ./hyprland
 
     # Bar
-    ./swaybar
 
     # App menu
     ./wofi
@@ -148,6 +148,12 @@ in {
     ./git
 
     ./gaming
+
+    ./stockly
+
+    ./systemd
+
+    ./waybar
   ];
 
 }
