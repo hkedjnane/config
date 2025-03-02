@@ -1,5 +1,4 @@
-{lib, pkgs, config, ...}:
-{
+{ lib, pkgs, config, ... }: {
   programs.git = {
     inherit (config.git) userEmail userName;
     package = pkgs.gitAndTools.gitFull;
@@ -12,15 +11,9 @@
         hooksPath = "/home/stockly/Repositories/Main/dev_tools/git_hooks/";
         pager = "less -x1,5";
       };
-      push = {
-        autoSetupRemote = true;
-      };
-      init = {
-        defaultBranch = "main";
-      };
-      color = {
-        ui = true;
-      };
+      push = { autoSetupRemote = true; };
+      init = { defaultBranch = "main"; };
+      color = { ui = true; };
     };
     lfs.enable = true;
 
@@ -52,15 +45,16 @@
       # Scripts
       arc = "!git add $(git rev-parse --show-toplevel) && git commit";
       arca = "!git add $(git rev-parse --show-toplevel) && git commit --amend";
-      arcap = "!git add $(git rev-parse --show-toplevel) && git commit --amend && git push -u --force-with-lease";
-      arcp = "!git add $(git rev-parse --show-toplevel) && git commit && git push -u";
+      arcap =
+        "!git add $(git rev-parse --show-toplevel) && git commit --amend && git push -u --force-with-lease";
+      arcp =
+        "!git add $(git rev-parse --show-toplevel) && git commit && git push -u";
       pmp = "!git pl && git mom && git ps";
       wip = "!git add $(Wgit rev-parse --show-toplevel) && git commit -m 'wip'";
-      wipp = "!git add $(git rev-parse --show-toplevel) && git commit -m 'wip' && git push -u";
+      wipp =
+        "!git add $(git rev-parse --show-toplevel) && git commit -m 'wip' && git push -u";
     };
   };
 
-  home.packages = with pkgs; [
-    pre-commit
-  ];
+  home.packages = with pkgs; [ pre-commit ];
 }

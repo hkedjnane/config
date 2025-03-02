@@ -1,4 +1,4 @@
-{config, pkgs, lib, ...}:
+{ config, pkgs, lib, ... }:
 lib.mkIf (!config.remote) {
 
   home.sessionVariables = {
@@ -12,11 +12,10 @@ lib.mkIf (!config.remote) {
       package = pkgs.hack-font;
       name = "Hack";
     };
-    themeFile = if config.darkmode then "Catppuccin-Frappe" else "Catppuccin-Latte";
+    themeFile =
+      if config.darkmode then "Catppuccin-Frappe" else "Catppuccin-Latte";
 
-    settings = {
-      confirm_os_window_close = 0;
-    };
+    settings = { confirm_os_window_close = 0; };
 
   };
 

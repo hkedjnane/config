@@ -1,27 +1,20 @@
-{pkgs, lib, config, ...}:
+{ pkgs, lib, config, ... }:
 lib.mkIf (!config.remote) {
-    wayland.windowManager.hyprland = {
-        enable = true;
-        # Basic configuration
+  wayland.windowManager.hyprland = {
+    enable = true;
+    # Basic configuration
 
-        extraConfig = builtins.readFile ./hyprland.conf;
-    };
+    extraConfig = builtins.readFile ./hyprland.conf;
+  };
 
+  programs.hyprlock = {
+    enable = true;
 
-    programs.hyprlock = {
-        enable = true;
+    extraConfig = builtins.readFile ./hyprlock.conf;
+  };
 
-        extraConfig = builtins.readFile ./hyprlock.conf;
-    };
+  home.packages = with pkgs; [ swaybg hyprshot acpi ];
 
-    home.packages = with pkgs; [
-      swaybg
-      hyprshot
-      acpi
-    ];
-
-    home.sessionVariables = {
-        HYPRSHOT_DIR = "$HOME/Pictures/Screenshots";
-    };
+  home.sessionVariables = { HYPRSHOT_DIR = "$HOME/Pictures/Screenshots"; };
 
 }

@@ -14,13 +14,13 @@
         isNormalUser = true;
         description = "Harrys Kedjnane";
         extraGroups = [ "networkmanager" "wheel" "audio" "video" "docker" ];
-        packages = [];
+        packages = [ ];
       };
       stockly = {
         isNormalUser = true;
         description = "Stockly Workstation";
         extraGroups = [ "networkmanager" "wheel" "audio" "video" "docker" ];
-        packages = [];
+        packages = [ ];
       };
     };
   };

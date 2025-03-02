@@ -1,12 +1,11 @@
-{ config, pkgs, lib, ... }:
-{
+{ config, pkgs, lib, ... }: {
   programs.helix = {
     enable = true;
-    languages = {
-    };
+    languages = { };
 
     settings = {
-      theme = if config.darkmode then "catppuccin_frappe" else "catppuccin_latte";
+      theme =
+        if config.darkmode then "catppuccin_frappe" else "catppuccin_latte";
 
       editor = {
         line-number = "relative";
@@ -20,7 +19,7 @@
     };
   };
 
-  home.activation.reloadHelix = lib.hm.dag.entryAfter ["writeBoundary"] ''
+  home.activation.reloadHelix = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     run ${pkgs.procps + "/bin/pkill"} -USR1 hx
   '';
 }

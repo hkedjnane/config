@@ -1,6 +1,7 @@
-{config, pkgs, lib, ...}:
+{ config, pkgs, lib, ... }:
 lib.mkIf (!config.remote) {
   hardware.bluetooth.enable = true; # enables support for Bluetooth
-  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
+  hardware.bluetooth.powerOnBoot =
+    true; # powers up the default Bluetooth controller on boot
   services.blueman.enable = true;
 }

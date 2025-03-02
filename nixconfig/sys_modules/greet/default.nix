@@ -1,12 +1,12 @@
 { config, pkgs, lib, ... }:
-let
-  tuigreet = "${pkgs.greetd.tuigreet}/bin/tuigreet";
+let tuigreet = "${pkgs.greetd.tuigreet}/bin/tuigreet";
 in lib.mkIf (!config.remote) {
   services.greetd = {
     enable = true;
     settings = {
       default_session = {
-        command = "${tuigreet} --time --user-menu --user-menu-min-uid 1000 --user-menu-max-uid 2000 --remember-session";
+        command =
+          "${tuigreet} --time --user-menu --user-menu-min-uid 1000 --user-menu-max-uid 2000 --remember-session";
         user = "greeter";
       };
     };

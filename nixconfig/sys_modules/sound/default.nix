@@ -1,4 +1,4 @@
-{config, pkgs, lib, ...}:
+{ config, pkgs, lib, ... }:
 lib.mkIf (!config.remote) {
 
   # Enable sound with pipewire.

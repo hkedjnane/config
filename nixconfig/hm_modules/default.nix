@@ -1,86 +1,87 @@
-{config, pkgs, ... }:
+{ config, pkgs, ... }:
 let
-  graphical = with pkgs; [
-    # Browser
-    firefox
-    google-chrome
+  graphical = with pkgs;
+    [
+      # Browser
+      firefox
+      google-chrome
 
-    # Communications
-    vesktop
-    slack
-    thunderbird #Email client
+      # Communications
+      vesktop
+      slack
+      thunderbird # Email client
 
-    # Development
-    vscode.fhs
+      # Development
+      vscode.fhs
 
-    # Media
-    spotify 
-    vlc
-    feh
-    qbittorrent
-    gimp
+      # Media
+      spotify
+      vlc
+      feh
+      qbittorrent
+      gimp
 
-    # VPN
-    protonvpn-gui
+      # VPN
+      protonvpn-gui
 
-    # Desktop utilities
-    pavucontrol   # Sound control
-    dolphin
-    filezilla     # (S)FTP Client
-    nwg-displays  # Monitor management
+      # Desktop utilities
+      pavucontrol # Sound control
+      dolphin
+      filezilla # (S)FTP Client
+      nwg-displays # Monitor management
 
-  ] ++ (lib.optionals (config.gaming) [prismlauncher osu-lazer]);
+    ] ++ (lib.optionals (config.gaming) [ prismlauncher osu-lazer ]);
 in {
 
-  home.packages = with pkgs; [
+  home.packages = with pkgs;
+    [
 
-    # VPN
-    protonvpn-cli_2
+      # VPN
+      protonvpn-cli_2
 
-    # CLI utilities
-    wget      # File downloading
-    curl      # File downloading
-    yazi        # File exploration
-    xsel      # Clipboard manager
-    tree      # Tree-like file display
-    htop      # Task Manager
-    btop      # Better Task Manager
-    zip       # ZIP creation
-    unzip     # ZIP decompression
-    ripgrep   # Supercharged grep
-    fzf       # Fuzzy finder
-    fd        # Find but good
-    bat       # Super cat with syntax highlighting
-    tmux      # Terminal multiplexer
-    comma     # Run program from nixpkgs without installing
-    neofetch  # El famoso
-    onefetch  # neofetch for git repos
-    ncdu      # Disk usage explorer
-    cht-sh    # Cheat sheets
-    pamixer   # PulseAudio mixer
-    playerctl # Media player control
-    sshfs     # mount a remote ssh directory locally
-    p7zip
-    file
-    man-pages
-    man-pages-posix
+      # CLI utilities
+      wget # File downloading
+      curl # File downloading
+      yazi # File exploration
+      xsel # Clipboard manager
+      tree # Tree-like file display
+      htop # Task Manager
+      btop # Better Task Manager
+      zip # ZIP creation
+      unzip # ZIP decompression
+      ripgrep # Supercharged grep
+      fzf # Fuzzy finder
+      fd # Find but good
+      bat # Super cat with syntax highlighting
+      tmux # Terminal multiplexer
+      comma # Run program from nixpkgs without installing
+      neofetch # El famoso
+      onefetch # neofetch for git repos
+      ncdu # Disk usage explorer
+      cht-sh # Cheat sheets
+      pamixer # PulseAudio mixer
+      playerctl # Media player control
+      sshfs # mount a remote ssh directory locally
+      p7zip
+      file
+      man-pages
+      man-pages-posix
 
-    # Fonts
-    victor-mono
-    hack-font
-    nerdfonts
-    jetbrains-mono
-    fantasque-sans-mono
-    font-awesome
+      # Fonts
+      victor-mono
+      hack-font
+      nerdfonts
+      jetbrains-mono
+      fantasque-sans-mono
+      font-awesome
 
+      # Humorous
+      lolcat
 
-    # Humorous
-    lolcat
-
-    # Password management
-    bitwarden
-  ] ++ (lib.optionals (!config.remote) graphical) ++ (lib.optionals config.sync [syncthing]);
-
+      # Password management
+      bitwarden
+    ] ++ (lib.optionals (!config.remote) graphical)
+    ++ (lib.optionals config.sync [ syncthing ]);
 
   # Media controls daemon
   services.playerctld = {
@@ -89,9 +90,7 @@ in {
   };
 
   # Add paths to $PATH
-  home.sessionPath = [
-    "$HOME/.local/bin"
-  ];
+  home.sessionPath = [ "$HOME/.local/bin" ];
 
   home.sessionVariables = {
     SHELL = "fish";
