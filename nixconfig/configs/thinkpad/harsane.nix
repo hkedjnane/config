@@ -9,7 +9,7 @@
     gaming = true;
     git = {
       userName = "Harrys Kedjnane";
-      userEmail = "harrys.kedjnane@epita.fr"
+      userEmail = "harrys.kedjnane@epita.fr";
     };
   };
 }
