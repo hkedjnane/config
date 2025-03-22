@@ -66,6 +66,7 @@ in {
       file
       man-pages
       man-pages-posix
+      wl-clipboard
 
       # Fonts
       victor-mono
