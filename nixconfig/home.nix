@@ -24,5 +24,9 @@
   # Font configuration
   fonts.fontconfig.enable = true;
 
+<<<<<<< Updated upstream
   imports = [ ./variables.nix ./configs/thinkpad/stockly.nix ./hm_modules ];
+=======
+  imports = [ ./variables.nix ./configs/thinkpad/harsane.nix ./hm_modules ];
+>>>>>>> Stashed changes
 }
