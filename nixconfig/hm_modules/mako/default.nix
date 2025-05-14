@@ -13,7 +13,6 @@ let
 in lib.mkIf (!config.remote) {
   services.mako = {
     enable = true;
-    extraConfig = builtins.readFile flavor;
     defaultTimeout = 5000;
   };
 }

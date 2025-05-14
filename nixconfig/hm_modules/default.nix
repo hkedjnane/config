@@ -26,7 +26,6 @@ let
 
       # Desktop utilities
       pavucontrol # Sound control
-      dolphin
       filezilla # (S)FTP Client
       nwg-displays # Monitor management
 
@@ -71,7 +70,6 @@ in {
       # Fonts
       victor-mono
       hack-font
-      nerdfonts
       jetbrains-mono
       fantasque-sans-mono
       font-awesome
@@ -82,7 +80,9 @@ in {
       # Password management
       bitwarden
     ] ++ (lib.optionals (!config.remote) graphical)
-    ++ (lib.optionals config.sync [ syncthing ]);
+    ++ (lib.optionals config.sync [ syncthing ])
+    ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
+
 
   # Media controls daemon
   services.playerctld = {

@@ -8,5 +8,6 @@ in (lib.mkIf (config.stockly) {
     in [
       jetbrains.datagrip
       (callPackage "${computers}/programs/insomnia.nix" { })
+      _1password-gui
     ];
 })
