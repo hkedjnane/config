@@ -1,18 +1,13 @@
 { pkgs, lib, config, ... }:
-let
-  catppuccin-config = pkgs.fetchFromGitHub {
-    owner = "catppuccin";
-    repo = "mako";
-    rev = "92844f1";
-    hash = "sha256-jgiZ+CrM4DX2nZR5BjjD9/Rk5CGGUy3gq9CCvYzp5Vs=";
-  };
-  flavor = if config.darkmode then
-    (catppuccin-config + /themes/catppuccin-frappe/catppuccin-frappe-mauve)
-  else
-    (catppuccin-config + /themes/catppuccin-latte/catppuccin-latte-mauve);
-in lib.mkIf (!config.remote) {
+lib.mkIf (!config.remote) {
   services.mako = {
     enable = true;
-    defaultTimeout = 5000;
+    settings = {
+      background-color = "#303446";
+      text-color = "#c6d0f5";
+      border-color = "#ca9ee6";
+      progress-color = "over #414559";
+      default-timeout = 5000;
+    };
   };
 }
