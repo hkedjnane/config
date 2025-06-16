@@ -6,4 +6,8 @@
     dhcpcd.extraConfig = "nohook resolv.conf";
     networkmanager.dns = "none";
   };
+
+  services.tailscale = {
+      enable = true;
+  };
 }

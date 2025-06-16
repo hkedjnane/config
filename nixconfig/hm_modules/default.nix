@@ -12,10 +12,11 @@ let
       thunderbird # Email client
 
       # Development
-      vscode.fhs
+      vscode
 
       # Media
       spotify
+      tidal-hifi
       vlc
       feh
       qbittorrent
@@ -28,6 +29,9 @@ let
       pavucontrol # Sound control
       filezilla # (S)FTP Client
       nwg-displays # Monitor management
+
+      # Remote session
+      moonlight-qt # Streaming client
 
     ] ++ (lib.optionals (config.gaming) [ prismlauncher osu-lazer ]);
 in {

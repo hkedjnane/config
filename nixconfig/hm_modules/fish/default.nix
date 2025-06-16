@@ -47,6 +47,24 @@ in {
         body =
           "source ~/.config/fish/config.fish && fish_config theme choose 'my_theme'";
       };
+      c = ''
+        set rel_path "$argv" 
+        test -z "$rel_path"; and set rel_path "."
+        set base_path "$(realpath $rel_path)"
+        pushd /
+        nix-direnv-reload
+        code "$base_path"
+        popd
+      '';
+      cr = ''
+        set rel_path "$argv" 
+        test -z "$rel_path"; and set rel_path "."
+        set base_path "$(realpath $rel_path)"
+        pushd /
+        nix-direnv-reload
+        code "$base_path" -r
+        popd
+      '';
       fish_greeting = "";
     };
 

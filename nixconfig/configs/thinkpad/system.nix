@@ -23,5 +23,6 @@
         packages = [ ];
       };
     };
+    tailscale = true;
   };
 }
