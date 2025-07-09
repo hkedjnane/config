@@ -8,6 +8,6 @@
   };
 
   services.tailscale = {
-      enable = true;
+      enable =  config.tailscale;
   };
 }
