@@ -33,14 +33,14 @@ let
       # Remote session
       moonlight-qt # Streaming client
 
-    ] ++ (lib.optionals (config.gaming) [ prismlauncher osu-lazer ]);
+    ] ++ (lib.optionals (config.gaming) [ prismlauncher ]);
 in {
 
   home.packages = with pkgs;
     [
 
       # VPN
-      protonvpn-cli_2
+      protonvpn-gui
 
       # CLI utilities
       wget # File downloading
@@ -60,7 +60,7 @@ in {
       comma # Run program from nixpkgs without installing
       neofetch # El famoso
       onefetch # neofetch for git repos
-      ncdu # Disk usage explorer
+      gdu # Disk usage explorer
       cht-sh # Cheat sheets
       pamixer # PulseAudio mixer
       playerctl # Media player control

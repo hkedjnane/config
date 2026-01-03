@@ -15,14 +15,17 @@
         description = "Harrys Kedjnane";
         extraGroups = [ "networkmanager" "wheel" "audio" "video" "docker" ];
         packages = [ ];
+        userConfig = import ./users/harsane.nix;
       };
       stockly = {
         isNormalUser = true;
         description = "Stockly Workstation";
         extraGroups = [ "networkmanager" "wheel" "audio" "video" "docker" ];
         packages = [ ];
+        userConfig = import ./users/stockly.nix;
       };
     };
     tailscale = true;
   };
+  imports = import ./imports.nix;
 }

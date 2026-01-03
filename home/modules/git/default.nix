@@ -8,7 +8,6 @@
         commentChar = "%"; # Because Stockly uses `#` in commits
         excludesfile = "~/.gitignore";
         editor = "nvim";
-        hooksPath = "/home/stockly/Repositories/Main/dev_tools/git_hooks/";
         pager = "less -x1,5";
       };
       push = { autoSetupRemote = true; };

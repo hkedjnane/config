@@ -15,6 +15,7 @@
         description = "Harrys Kedjnane";
         extraGroups = [ "networkmanager" "wheel" "audio" "video" "docker" ];
         packages = [ ];
+        userConfig = import ./users/harsane.nix;
       };
     };
   };

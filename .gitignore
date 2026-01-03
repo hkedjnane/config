@@ -6,4 +6,4 @@ debug
 foo.*
 *.log
 data
-nixconfig/hardware-configuration.nix
+hardware-configuration.nix

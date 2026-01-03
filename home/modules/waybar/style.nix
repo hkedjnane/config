@@ -2,6 +2,7 @@ let
   frappe_css = builtins.fetchurl {
     url =
       "https://github.com/catppuccin/waybar/releases/download/v1.1/frappe.css";
+    sha256 = "08bq94jjkcg574n1zjfskps34f8qr8blljhppy4k4b85ka5yxk50";
   };
 in ''
   @import "${frappe_css}";

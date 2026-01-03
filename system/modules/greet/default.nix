@@ -1,5 +1,5 @@
 { config, pkgs, lib, ... }:
-let tuigreet = "${pkgs.greetd.tuigreet}/bin/tuigreet";
+let tuigreet = "${pkgs.tuigreet}/bin/tuigreet";
 in lib.mkIf (!config.remote) {
   services.greetd = {
     enable = true;

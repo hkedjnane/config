@@ -16,11 +16,7 @@ in
   imports =
     [ # Include thm results of the hardware scan.
      ./hardware-configuration.nix
-     ./variables.nix
-     # Picked configuration, switch to another one if needed
-     ./configs/thinkpad/system.nix
-     ./configs/thinkpad/imports.nix
-     ./sys_modules
+     ./modules
    ];
 
   # Bootloader.
@@ -76,7 +72,10 @@ in
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users = config.userList;
+  users.users =
+    lib.mapAttrs
+      (_: user: builtins.removeAttrs user [ "userConfig" ])
+      config.userList;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;

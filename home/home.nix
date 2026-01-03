@@ -2,8 +2,8 @@
 {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
-  home.username = builtins.getEnv "USER";
-  home.homeDirectory = builtins.getEnv "HOME";
+  home.username = config.userName;
+  home.homeDirectory = config.homeDirectory;
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
@@ -24,5 +24,5 @@
   # Font configuration
   fonts.fontconfig.enable = true;
 
-  imports = [ ./variables.nix ./configs/thinkpad/harsane.nix ./hm_modules ];
+  imports = [ ./modules ];
 }

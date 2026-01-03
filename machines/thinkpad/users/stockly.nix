@@ -5,11 +5,14 @@
     thinkpad = true;
     manageBoot = true;
     managePower = true;
-    sync = true;
-    gaming = true;
+    sync = false;
+    stockly = true;
+    gaming = false;
     git = {
       userName = "Harrys Kedjnane";
-      userEmail = "harrys.kedjnane@epita.fr";
+      userEmail = "harrys.kedjnane@stockly.ai";
     };
+    homeDirectory = "/home/stockly";
+    userName = "stockly";
   };
 }
