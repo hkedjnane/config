@@ -1,5 +1,7 @@
 {
   config = {
+    userName = "main";
+    homeDirectory = "/home/main";
     darkmode = true;
     remote = true;
     thinkpad = false;
@@ -9,7 +11,7 @@
     gaming = false;
     git = {
       userName = "Harrys Kedjnane";
-      userEmail = "harrys.kedjnane@epita.fr";
+      userEmail = "mail@hkedjnane.com";
     };
   };
 }

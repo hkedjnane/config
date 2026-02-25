@@ -7,16 +7,20 @@
     managePower = false;
     sync = false;
     gaming = false;
-    swapfile_gb = 16;
+    tailscale = true;
+    swapfile_gb = 4;
     hostname = "homelab";
     userList = {
-      harsane = {
+      main = {
         isNormalUser = true;
-        description = "Harrys Kedjnane";
+        description = "Main";
         extraGroups = [ "networkmanager" "wheel" "audio" "video" "docker" ];
         packages = [ ];
-        userConfig = import ./users/harsane.nix;
+        userConfig = import ./users/main.nix;
+	openssh.authorizedKeys.keys = [
+	];
       };
     };
+    allowedTCPPorts = [ 80 443 ];
   };
 }

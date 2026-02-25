@@ -16,5 +16,6 @@
     tailscale = mkOption { type = bool; default = false;};
     userName = mkOption { type = str; default = "user"; };
     homeDirectory = mkOption { type = str; default = "/home/user"; };
+    allowedTCPPorts = mkOption { type = listOf int; default = []; };
   };
 }

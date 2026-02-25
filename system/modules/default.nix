@@ -5,11 +5,6 @@
 
   programs.hyprland.enable = !config.remote;
 
-  #services.logind.extraConfig = ''
-  #  # don’t shutdown when power button is short-pressed
-  #  HandlePowerKey=suspend
-  #'';
-
   environment.sessionVariables = if config.remote then
     { }
   else {

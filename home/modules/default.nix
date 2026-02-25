@@ -33,6 +33,10 @@ let
       # Remote session
       moonlight-qt # Streaming client
 
+
+      # Password management
+      bitwarden-desktop
+
     ] ++ (lib.optionals (config.gaming) [ prismlauncher ]);
 in {
 
@@ -80,9 +84,6 @@ in {
 
       # Humorous
       lolcat
-
-      # Password management
-      bitwarden
     ] ++ (lib.optionals (!config.remote) graphical)
     ++ (lib.optionals config.sync [ syncthing ])
     ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);

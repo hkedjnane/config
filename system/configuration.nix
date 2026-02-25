@@ -8,7 +8,7 @@ catppuccin-grub = pkgs.fetchFromGitHub {
     owner = "catppuccin";
     repo = "grub";
     rev = "HEAD";
-    sha256 = "e8XFWebd/GyX44WQI06Cx6sOduCZc5z7/YhweVQGMGY=";
+    sha256 = "jgM22pvCQvb0bjQQXoiqGMgScR9AgCK3OfDF5Ud+/mk=";
 } + "/src/catppuccin-frappe-grub-theme";
 catppuccin-plymouth = pkgs.catppuccin-plymouth.override { variant = "frappe"; };
 in
@@ -19,10 +19,12 @@ in
      ./modules
    ];
 
+   services.rpcbind.enable = true; # needed for NFS
+
   # Bootloader.
   boot = {
 
-    supportedFilesystems = [ "ntfs" ];
+    supportedFilesystems = [ "ntfs" "nfs" ];
     kernelModules = [ "kvm-amd" ];
 
     loader.efi.canTouchEfiVariables = true;
@@ -65,8 +67,8 @@ in
   i18n.defaultLocale = "en_US.UTF-8";
 
   # Configure X11 server
-  services.xserver = {
-    enable = config.remote;
+  services.xserver = lib.mkIf (!config.remote) {
+    enable = true;
     xkb.layout = "us";
     xkb.variant = "";
   };

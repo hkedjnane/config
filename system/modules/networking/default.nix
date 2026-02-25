@@ -5,6 +5,10 @@
     nameservers = [ "1.1.1.1" "1.0.0.1" "8.8.8.8" ];
     dhcpcd.extraConfig = "nohook resolv.conf";
     networkmanager.dns = "none";
+    firewall = {
+       allowedTCPPorts = config.allowedTCPPorts;
+       enable = true;
+    };
   };
 
   services.tailscale = {

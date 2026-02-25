@@ -4,7 +4,7 @@ let
     owner = "catppuccin";
     repo = "fish";
     rev = "HEAD";
-    hash = "sha256-Dc/zdxfzAUM5NX8PxzfljRbYvO9f9syuLO8yBr+R3qg=";
+    hash = "sha256-jn2YoybaDY2gQgqmVGi9GPeRWn/H6IHnzxi/VcihIYM=";
   };
   theme = if config.darkmode then "Frappe" else "Latte";
 in {
@@ -79,7 +79,7 @@ in {
           owner = "kidonng";
           repo = "nix.fish";
           rev = "HEAD";
-          sha256 = "Hyq4EfSmWmxwCYhp3O8agr7VWFAflcUe8BUKh50fNfY=";
+    	  sha256 = "GMV0GyORJ8Tt2S9wTCo2lkkLtetYv0rc19aA5KJbo48=";
         };
       }
       {
