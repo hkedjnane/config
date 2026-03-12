@@ -5,6 +5,7 @@ let
       # Browser
       firefox
       google-chrome
+      chromium
 
       # Communications
       vesktop
@@ -33,6 +34,8 @@ let
       # Remote session
       moonlight-qt # Streaming client
 
+      libreoffice
+
     ] ++ (lib.optionals (config.gaming) [ prismlauncher osu-lazer ]);
 in {
 
@@ -40,7 +43,7 @@ in {
     [
 
       # VPN
-      protonvpn-cli_2
+      protonvpn-gui
 
       # CLI utilities
       wget # File downloading
@@ -82,7 +85,7 @@ in {
       lolcat
 
       # Password management
-      bitwarden
+      bitwarden-desktop
     ] ++ (lib.optionals (!config.remote) graphical)
     ++ (lib.optionals config.sync [ syncthing ])
     ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);

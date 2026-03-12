@@ -16,7 +16,7 @@
         extraGroups = [ "networkmanager" "wheel" "audio" "video" "docker" ];
         packages = [ ];
       };
-      stockly = {
+      isStockly = {
         isNormalUser = true;
         description = "Stockly Workstation";
         extraGroups = [ "networkmanager" "wheel" "audio" "video" "docker" ];

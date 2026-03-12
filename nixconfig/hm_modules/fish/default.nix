@@ -47,6 +47,7 @@ in {
         body =
           "source ~/.config/fish/config.fish && fish_config theme choose 'my_theme'";
       };
+      send = ''scp $argv charybdis:/home/hkedjnane'';
       c = ''
         set rel_path "$argv" 
         test -z "$rel_path"; and set rel_path "."
