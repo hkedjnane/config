@@ -6,7 +6,7 @@
     manageBoot = true;
     managePower = true;
     sync = false;
-    stockly = true;
+    isStockly = true;
     gaming = false;
     git = {
       userName = "Harrys Kedjnane";

@@ -5,6 +5,7 @@ let
       # Browser
       firefox
       google-chrome
+      chromium
 
       # Communications
       vesktop
@@ -33,6 +34,7 @@ let
       # Remote session
       moonlight-qt # Streaming client
 
+      libreoffice
 
       # Password management
       bitwarden-desktop

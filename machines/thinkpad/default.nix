@@ -17,7 +17,7 @@
         packages = [ ];
         userConfig = import ./users/harsane.nix;
       };
-      stockly = {
+      isStockly = {
         isNormalUser = true;
         description = "Stockly Workstation";
         extraGroups = [ "networkmanager" "wheel" "audio" "video" "docker" ];
