@@ -1,72 +1,83 @@
-{
-  mainBar = {
-    "layer" = "top";
-    "position" = "top";
-    "modules-left" = [ "wlr/workspaces" ];
-    "modules-center" = [ "custom/music" ];
-    "modules-right" = [
-      "pulseaudio"
-      "backlight"
-      "battery"
-      "clock"
-      "tray"
-      "custom/lock"
-      "custom/power"
-    ];
-    "wlr/workspaces" = {
-      "disable-scroll" = true;
-      "sort-by-name" = true;
-      "format" = " {icon} ";
-      "format-icons" = { "default" = ""; };
-    };
-    "tray" = {
-      "icon-size" = 21;
-      "spacing" = 10;
-    };
-    "custom/music" = {
-      "format" = "  {}";
-      "escape" = true;
-      "interval" = 5;
-      "tooltip" = false;
-      "exec" = "playerctl metadata --format='{{ title }}'";
-      "on-click" = "playerctl play-pause";
-      "max-length" = 50;
-    };
-    "clock" = {
-      "timezone" = "Europe/Paris";
-      "tooltip-format" = ''
-        <big>{:%Y %B}</big>
-        <tt><small>{calendar}</small></tt>'';
-      "format-alt" = " {:%d/%m/%Y}";
-      "format" = " {:%H:%M}";
-    };
-    "backlight" = {
-      "device" = "amdgpu_bl1";
-      "format" = "{icon}";
-      "format-icons" = [ "" "" "" "" "" "" "" "" "" ];
-    };
-    "battery" = {
-      "states" = {
-        "warning" = 30;
-        "critical" = 15;
+# One bar definition, parameterised over what `waybar-ctl` can change at
+# runtime: waybar cannot move or change its exclusivity live, so each
+# combination gets its own config file and the bar is restarted between them.
+{ position, folded, notifs }:
+let
+  # Nerd Font glyph from its codepoint, to keep this file readable without
+  # the font installed.
+  icon = code: builtins.fromJSON ''"\u${code}"'';
+in {
+  inherit position;
+  layer = "top";
+  height = 26;
+  # Flush with the screen edge, see the tab shape in style.nix.
+  margin = "0 10";
+
+  modules-left = [ "hyprland/window" ];
+  modules-center = [ "clock" ];
+  modules-right = [ "mpris" "custom/notifs" "battery" ];
+
+  "hyprland/window" = {
+    format = "{title}";
+    max-length = 70;
+    icon = false;
+  };
+
+  clock = {
+    format = "${icon "f017"}  {:%H:%M}";
+    format-alt = "${icon "f073"}  {:%A %d %B %Y}";
+    tooltip-format = "<tt><small>{calendar}</small></tt>";
+    calendar = {
+      mode = "month";
+      weeks-pos = "left";
+      format = {
+        months = "<b>{}</b>";
+        today = "<b><u>{}</u></b>";
       };
-      "format" = "{icon}";
-      "format-charging" = "";
-      "format-plugged" = "";
-      "format-alt" = "{icon}";
-      "format-icons" = [ "" "" "" "" "" "" "" "" "" "" "" "" ];
-    };
-    "pulseaudio" = {
-      "format" = "{icon} {volume}%";
-      "format-muted" = "";
-      "format-icons" = { "default" = [ "" "" " " ]; };
-      "on-click" = "pavucontrol";
-    };
-    "custom/power" = {
-      "tooltip" = false;
-      "on-click" = "wlogout &";
-      "format" = "襤";
     };
   };
-}
 
+  battery = {
+    states = {
+      warning = 30;
+      critical = 15;
+    };
+    format = "{icon}  {capacity}%";
+    format-charging = "${icon "f0e7"}  {capacity}%";
+    format-plugged = "${icon "f1e6"}  {capacity}%";
+    format-icons = map icon [ "f244" "f243" "f242" "f241" "f240" ];
+    tooltip-format = "{timeTo}\n{power:.1f} W";
+  };
+
+  # Current media, hidden when nothing is playing. Left click toggles
+  # play/pause, middle and right click go to the previous and next track.
+  mpris = {
+    format = "{status_icon}  {dynamic}";
+    dynamic-order = [ "title" "artist" ];
+    dynamic-len = 45;
+    status-icons = {
+      playing = icon "f001";
+      paused = icon "f04c";
+      stopped = icon "f04d";
+    };
+  };
+
+  # Mako state: left click brings the last notification back, middle click
+  # dismisses everything, right click toggles do-not-disturb.
+  "custom/notifs" = {
+    exec = "${notifs}";
+    return-type = "json";
+    interval = 2;
+    on-click = "makoctl restore";
+    on-click-middle = "makoctl dismiss --all";
+    on-click-right = "makoctl mode -t do-not-disturb";
+  };
+} // (if folded then {
+  # Drawn over the windows and hidden until `waybar-ctl` sees the pointer on
+  # the screen edge and signals it.
+  exclusive = false;
+  start_hidden = true;
+  on-sigusr1 = "show";
+  on-sigusr2 = "hide";
+} else
+  { })

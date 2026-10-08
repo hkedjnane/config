@@ -1,110 +1,159 @@
+# Catppuccin palette, `frappe` when `darkmode` is set and `latte` otherwise,
+# like the rest of the config.
+{ darkmode }:
 let
-  frappe_css = builtins.fetchurl {
-    url =
-      "https://github.com/catppuccin/waybar/releases/download/v1.1/frappe.css";
-    sha256 = "08bq94jjkcg574n1zjfskps34f8qr8blljhppy4k4b85ka5yxk50";
+  palettes = {
+    frappe = {
+      base = "#303446";
+      surface0 = "#414559";
+      surface1 = "#51576d";
+      overlay1 = "#838ba7";
+      text = "#c6d0f5";
+      lavender = "#babbf1";
+      blue = "#8caaee";
+      teal = "#81c8be";
+      green = "#a6d189";
+      yellow = "#e5c890";
+      peach = "#ef9f76";
+      red = "#e78284";
+      mauve = "#ca9ee6";
+      pink = "#f4b8e4";
+    };
+    latte = {
+      base = "#eff1f5";
+      surface0 = "#ccd0da";
+      surface1 = "#bcc0cc";
+      overlay1 = "#8c8fa1";
+      text = "#4c4f69";
+      lavender = "#7287fd";
+      blue = "#1e66f5";
+      teal = "#179299";
+      green = "#40a02b";
+      yellow = "#df8e1d";
+      peach = "#fe640b";
+      red = "#d20f39";
+      mauve = "#8839ef";
+      pink = "#ea76cb";
+    };
   };
+  palette = if darkmode then palettes.frappe else palettes.latte;
+  colors = builtins.concatStringsSep "\n" (builtins.attrValues
+    (builtins.mapAttrs (name: value: "@define-color ${name} ${value};")
+      palette));
 in ''
-  @import "${frappe_css}";
+  ${colors}
 
   * {
-    font-family: FantasqueSansMono Nerd Font;
-    font-size: 17px;
+    font-family: "FantasqueSansM Nerd Font", "Font Awesome 6 Free";
+    font-size: 13px;
     min-height: 0;
+    border: none;
   }
 
-  #waybar {
+  window#waybar {
     background: transparent;
     color: @text;
-    margin: 5px 5px;
   }
 
-  #workspaces {
-    border-radius: 1rem;
-    margin: 5px;
-    background-color: @surface0;
-    margin-left: 1rem;
+  /* Three tabs hanging from the screen edge rather than a full-width strip. */
+  .modules-left,
+  .modules-center,
+  .modules-right {
+    background: alpha(@base, 0.92);
+    border: 1px solid @surface1;
+    padding: 0 5px;
   }
 
-  #workspaces button {
-    color: @lavender;
-    border-radius: 1rem;
-    padding: 0.4rem;
+  /* Square against the screen edge, rounded on the other side. */
+  window#waybar.top .modules-left,
+  window#waybar.top .modules-center,
+  window#waybar.top .modules-right {
+    border-top: none;
+    border-radius: 0 0 13px 13px;
   }
 
-  #workspaces button.active {
-    color: @sky;
-    border-radius: 1rem;
+  window#waybar.bottom .modules-left,
+  window#waybar.bottom .modules-center,
+  window#waybar.bottom .modules-right {
+    border-bottom: none;
+    border-radius: 13px 13px 0 0;
   }
 
-  #workspaces button:hover {
-    color: @sapphire;
-    border-radius: 1rem;
+  /* No focused window: drop the empty island. */
+  window#waybar.empty .modules-left {
+    background: transparent;
+    border-color: transparent;
   }
 
-  #custom-music,
-  #tray,
-  #backlight,
+  #window,
   #clock,
+  #mpris,
   #battery,
-  #pulseaudio,
-  #custom-lock,
-  #custom-power {
-    background-color: @surface0;
-    padding: 0.5rem 1rem;
-    margin: 5px 0;
+  #custom-notifs {
+    padding: 0 9px;
+  }
+
+  #window {
+    color: @lavender;
   }
 
   #clock {
     color: @blue;
-    border-radius: 0px 1rem 1rem 0px;
-    margin-right: 1rem;
+    font-weight: bold;
+  }
+
+  #mpris {
+    color: @pink;
+  }
+
+  #mpris.paused,
+  #mpris.stopped {
+    color: @overlay1;
+  }
+
+  #custom-notifs {
+    color: @mauve;
+  }
+
+  #custom-notifs.pending {
+    color: @peach;
+  }
+
+  #custom-notifs.dnd {
+    color: @overlay1;
   }
 
   #battery {
     color: @green;
   }
 
-  #battery.charging {
-    color: @green;
+  #battery.charging,
+  #battery.plugged {
+    color: @teal;
   }
 
   #battery.warning:not(.charging) {
-    color: @red;
-  }
-
-  #backlight {
     color: @yellow;
   }
 
-  #backlight, #battery {
-      border-radius: 0;
+  #battery.critical:not(.charging) {
+    color: @red;
+    animation: blink 1s steps(2) infinite;
   }
 
-  #pulseaudio {
-    color: @maroon;
-    border-radius: 1rem 0px 0px 1rem;
-    margin-left: 1rem;
+  @keyframes blink {
+    to {
+      color: @surface1;
+    }
   }
 
-  #custom-music {
-    color: @mauve;
-    border-radius: 1rem;
+  tooltip {
+    background: @base;
+    border: 1px solid @mauve;
+    border-radius: 10px;
   }
 
-  #custom-lock {
-      border-radius: 1rem 0px 0px 1rem;
-      color: @lavender;
-  }
-
-  #custom-power {
-      margin-right: 1rem;
-      border-radius: 0px 1rem 1rem 0px;
-      color: @red;
-  }
-
-  #tray {
-    margin-right: 1rem;
-    border-radius: 1rem;
+  tooltip label {
+    color: @text;
   }
 ''
