@@ -14,6 +14,8 @@ let
 
       # Development
       vscode
+      code-cursor
+      claude-code
 
       # Media
       spotify
