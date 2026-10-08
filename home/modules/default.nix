@@ -158,6 +158,9 @@ in {
 
     ./stockly
 
+    # Screen region OCR
+    ./ocr
+
     ./systemd
 
     ./waybar
