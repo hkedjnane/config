@@ -64,7 +64,7 @@ in {
       bat # Super cat with syntax highlighting
       tmux # Terminal multiplexer
       comma # Run program from nixpkgs without installing
-      neofetch # El famoso
+      hyfetch # neofetch fork
       onefetch # neofetch for git repos
       gdu # Disk usage explorer
       cht-sh # Cheat sheets

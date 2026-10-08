@@ -4,16 +4,16 @@ let
     owner = "catppuccin";
     repo = "fish";
     rev = "HEAD";
-    hash = "sha256-jn2YoybaDY2gQgqmVGi9GPeRWn/H6IHnzxi/VcihIYM=";
+    hash = "sha256-3KNWYXfOMzZovdjwjBpjSH8cVlD4CO2QmQcCyQE4Dac=";
   };
-  theme = if config.darkmode then "Frappe" else "Latte";
+  theme = if config.darkmode then "frappe" else "latte";
 in {
   xdg.configFile."fish/themes/my_theme.theme".source =
-    "${catppuccin-fish}/themes/Catppuccin ${theme}.theme";
+    "${catppuccin-fish}/themes/catppuccin-${theme}.theme";
   xdg.configFile."fish/themes/dark.theme".source =
-    "${catppuccin-fish}/themes/Catppuccin Frappe.theme";
+    "${catppuccin-fish}/themes/catppuccin-frappe.theme";
   xdg.configFile."fish/themes/light.theme".source =
-    "${catppuccin-fish}/themes/Catppuccin Latte.theme";
+    "${catppuccin-fish}/themes/catppuccin-latte.theme";
   programs.fish = {
     enable = true;
     shellAliases = {
