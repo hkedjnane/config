@@ -108,7 +108,6 @@ in
 };
 
   security.polkit.enable = true;
-  programs.light.enable = !config.remote;
 
   programs.kdeconnect.enable = !config.remote;
 

@@ -13,7 +13,7 @@ lib.mkIf (!config.remote) {
     extraConfig = builtins.readFile ./hyprlock.conf;
   };
 
-  home.packages = with pkgs; [ swaybg hyprshot acpi ];
+  home.packages = with pkgs; [ swaybg hyprshot acpi brightnessctl ];
 
   home.sessionVariables = { HYPRSHOT_DIR = "$HOME/Pictures/Screenshots"; };
 
