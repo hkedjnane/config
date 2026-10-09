@@ -13,7 +13,6 @@ let
       thunderbird # Email client
 
       # Development
-      vscode
       code-cursor
       claude-code
 
