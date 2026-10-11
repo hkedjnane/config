@@ -157,6 +157,9 @@ in {
 
     ./gaming
 
+    # Media player
+    ./mpv
+
     ./stockly
 
     # Screen region OCR
