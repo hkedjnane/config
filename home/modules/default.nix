@@ -127,7 +127,8 @@ in {
   # to grab some presets.
   services.easyeffects = {
     enable = !config.remote;
-    preset = "Laptop";
+    # Tuned for the laptop speakers
+    preset = pkgs.lib.mkIf config.thinkpad "Laptop";
   };
 
   imports = [
