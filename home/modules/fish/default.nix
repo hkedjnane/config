@@ -80,7 +80,7 @@ in {
           owner = "kidonng";
           repo = "nix.fish";
           rev = "HEAD";
-    	  sha256 = "GMV0GyORJ8Tt2S9wTCo2lkkLtetYv0rc19aA5KJbo48=";
+    	  sha256 = "3M0dU30SrdjInp6MWEC0q7MTInrZNtY6Z9mhBw43PKs=";
         };
       }
       {
