@@ -62,6 +62,15 @@ lib.mkIf (!config.remote) {
           }
         }
       }
+
+      exec-once = awww-daemon
+      # Nearest keeps the pixel art sharp
+      exec-once = awww img --filter Nearest --transition-type none ${
+        if config.darkmode then
+          ./wallpapers/aesthetic-city-dusk.gif
+        else
+          ./wallpapers/aesthetic-city-latte.gif
+      }
     '';
   };
 
@@ -113,7 +122,7 @@ lib.mkIf (!config.remote) {
     extraConfig = builtins.readFile ./hyprlock.conf;
   };
 
-  home.packages = with pkgs; [ swaybg hyprshot acpi brightnessctl ];
+  home.packages = with pkgs; [ awww hyprshot acpi brightnessctl ];
 
   home.sessionVariables = { HYPRSHOT_DIR = "$HOME/Pictures/Screenshots"; };
 
