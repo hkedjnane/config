@@ -85,7 +85,10 @@ in
   # Enable docker
   virtualisation.docker.enable = true;
 
-  hardware.graphics.enable = !config.remote;
+  hardware = {
+    graphics.enable = !config.remote;
+    enableRedistributableFirmware = true;
+  };
 
   nix = {
     package = pkgs.nixVersions.stable;
