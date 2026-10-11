@@ -8,7 +8,7 @@
     sync = true;
     gaming = true;
     swapfile_gb = 16;
-    hostname = "nixos";
+    hostname = "thinkpad";
     userList = {
       harsane = {
         isNormalUser = true;
