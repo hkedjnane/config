@@ -12,6 +12,6 @@
     QT_QPA_PLATFORM = "wayland";
   };
 
-  imports = [ ./greet ./bluetooth ./sound ./power ./networking ./gaming ./ssh ./display ];
+  imports = [ ./greet ./bluetooth ./sound ./power ./networking ./gaming ./ssh ./display ./apollo ];
 
 }

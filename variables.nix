@@ -10,6 +10,7 @@
     userList = mkOption { type = attrs; default = {}; };
     sync = mkOption { type = bool; default = false; };
     gaming = mkOption { type = bool; default = false; };
+    apollo = mkOption { type = bool; default = false; };
     swapfile_gb = mkOption { type = int; default = 16; };
     isStockly = mkOption { type = bool; default = false; };
     git = mkOption { type = attrs; default = {}; };
