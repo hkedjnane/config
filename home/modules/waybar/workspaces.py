@@ -37,6 +37,9 @@ HYPR = (
     / os.environ["HYPRLAND_INSTANCE_SIGNATURE"]
 )
 OUT = Path(os.environ["WAYBAR_WORKSPACES"])
+# Written in place of a missing icon: the image module keeps its previous
+# icon when it reads no line at all, and hides on a path that does not exist.
+NO_ICON = "/nonexistent"
 
 icons = {}
 missing = {}
@@ -125,7 +128,7 @@ def snapshot():
     for workspace in WORKSPACES:
         client = last.get(workspace)
         label = {"text": ""}
-        icon = ""
+        icon = NO_ICON
         if client is not None:
             title = html.escape(" ".join(client["title"].split()))
             label = {
@@ -133,7 +136,7 @@ def snapshot():
                 "class": "active" if workspace == active else "inactive",
                 "tooltip": title,
             }
-            icon = f"{icon_for(client)}\n{title}"
+            icon = f"{icon_for(client) or NO_ICON}\n{title}"
         files[f"{workspace}.json"] = json.dumps(label)
         files[f"{workspace}.icon"] = icon
     return files

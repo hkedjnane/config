@@ -9,7 +9,7 @@ let
 
   # Number and icon of the last focused window for every workspace holding
   # a window. Both read what `waybar-workspaces` writes, which signals the
-  # bar on every change, and are hidden while their file is empty.
+  # bar on every change, and are hidden while the workspace is empty.
   workspaces = builtins.genList (index: toString (index + 1)) 10;
   workspaceModule = suffix: extra: workspace:
     {
