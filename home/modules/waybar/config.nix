@@ -6,6 +6,31 @@ let
   # Nerd Font glyph from its codepoint, to keep this file readable without
   # the font installed.
   icon = code: builtins.fromJSON ''"\u${code}"'';
+
+  # Number and icon of the last focused window for every workspace holding
+  # a window. Both read what `waybar-workspaces` writes, which signals the
+  # bar on every change, and are hidden while their file is empty.
+  workspaces = builtins.genList (index: toString (index + 1)) 10;
+  workspaceModule = suffix: extra: workspace:
+    {
+      exec = ''cat "$WAYBAR_WORKSPACES/${workspace}.${suffix}" 2>/dev/null'';
+      signal = 8;
+      on-click = "hyprctl dispatch workspace ${workspace}";
+    } // extra;
+  workspaceModules = builtins.listToAttrs (builtins.concatMap (workspace: [
+    {
+      name = "custom/workspace#${workspace}";
+      value = workspaceModule "json" { return-type = "json"; } workspace;
+    }
+    {
+      name = "image#workspace-${workspace}";
+      # Without an interval the image module polls every millisecond.
+      value = workspaceModule "icon" {
+        size = 16;
+        interval = "once";
+      } workspace;
+    }
+  ]) workspaces);
 in {
   inherit position;
   layer = "top";
@@ -13,9 +38,19 @@ in {
   # Flush with the screen edge, see the tab shape in style.nix.
   margin = "0 10";
 
-  modules-left = [ "hyprland/window" ];
+  modules-left = builtins.concatMap (workspace: [
+    "custom/workspace#${workspace}"
+    "image#workspace-${workspace}"
+  ]) workspaces ++ [ "hyprland/window" ];
   modules-center = [ "clock" ];
-  modules-right = [ "mpris" "custom/notifs" "battery" ];
+  modules-right = [ "mpris" "tray" "custom/notifs" "battery" ];
+
+  # Apps still running without a window, such as Discord or Steam once
+  # closed. A click brings their window back.
+  tray = {
+    icon-size = 16;
+    spacing = 8;
+  };
 
   "hyprland/window" = {
     format = "{title}";
@@ -72,7 +107,7 @@ in {
     on-click-middle = "makoctl dismiss --all";
     on-click-right = "makoctl mode -t do-not-disturb";
   };
-} // (if folded then {
+} // workspaceModules // (if folded then {
   # Drawn over the windows and hidden until `waybar-ctl` sees the pointer on
   # the screen edge and signals it.
   exclusive = false;

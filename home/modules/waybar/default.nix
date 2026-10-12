@@ -30,6 +30,12 @@ let
     '';
   };
 
+  # Feeds the workspace modules, see config.nix.
+  workspaces = pkgs.writers.writePython3Bin "waybar-workspaces" {
+    libraries = [ pkgs.python3Packages.pyxdg ];
+    flakeIgnore = [ "E501" "W503" ];
+  } (builtins.readFile ./workspaces.py);
+
   mkBar = { position, folded }:
     import ./config.nix {
       inherit position folded;
@@ -53,6 +59,7 @@ let
     name = "waybar-ctl";
     runtimeInputs = with pkgs; [
       waybar
+      workspaces
       config.wayland.windowManager.hyprland.package
       jq
       coreutils
@@ -156,9 +163,13 @@ let
           if [ "$folded" = 1 ]; then config+="-folded"; fi
 
           echo $$ > "$pidfile"
+          export WAYBAR_WORKSPACES="$run_dir/workspaces"
+          rm -rf "$WAYBAR_WORKSPACES"
           waybar -c "$config.json" &
           bar=$!
-          trap 'kill "$bar" 2>/dev/null || true; wait "$bar" 2>/dev/null || true' EXIT
+          waybar-workspaces "$bar" &
+          feed=$!
+          trap 'kill "$bar" "$feed" 2>/dev/null || true; wait "$bar" 2>/dev/null || true' EXIT
           trap 'exit 0' TERM INT
 
           if [ "$folded" = 1 ]; then

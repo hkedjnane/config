@@ -79,15 +79,24 @@ in ''
     border-radius: 13px 13px 0 0;
   }
 
-  /* No focused window: drop the empty island. */
-  window#waybar.empty .modules-left {
-    background: transparent;
-    border-color: transparent;
+  #custom-workspace {
+    padding: 0 5px 0 9px;
+    color: @overlay1;
+    font-weight: bold;
+  }
+
+  #custom-workspace.active {
+    color: @peach;
+  }
+
+  #image:not(.empty) {
+    padding-right: 4px;
   }
 
   #window,
   #clock,
   #mpris,
+  #tray,
   #battery,
   #custom-notifs {
     padding: 0 9px;
