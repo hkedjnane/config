@@ -63,7 +63,6 @@ in {
       fzf # Fuzzy finder
       fd # Find but good
       bat # Super cat with syntax highlighting
-      tmux # Terminal multiplexer
       comma # Run program from nixpkgs without installing
       hyfetch # neofetch fork
       onefetch # neofetch for git repos
@@ -155,6 +154,7 @@ in {
 
     # Tools
     ./git
+    ./tmux
 
     ./gaming
 
