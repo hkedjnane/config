@@ -1,8 +1,8 @@
-{ pkgs, lib, config, ... }:
+{ pkgs, pkgs-hyprland, lib, config, ... }:
 let
-  # Workspace overview plugin (Super+Tab). Off until hyprtasking builds against
-  # Hyprland 0.57 (its last upstream commit, 2026-09-29, predates that release).
-  hyprtasking = false;
+  # Workspace overview plugin (Super+Tab). It does not build against Hyprland
+  # 0.57 yet, so turn it off if Hyprland moves past the 0.56.2 pin (see flake.nix).
+  hyprtasking = true;
 
   # Fuzzy window picker across all workspaces, most recently focused first.
   # The current window goes last so that Enter jumps back to the previous one.
@@ -38,8 +38,10 @@ in
 lib.mkIf (!config.remote) {
   wayland.windowManager.hyprland = {
     enable = true;
+    # Pinned to 0.56.2, see the nixpkgs-hyprland input in flake.nix
+    package = pkgs-hyprland.hyprland;
     # Workspace overview with live window contents
-    plugins = lib.optional hyprtasking pkgs.hyprlandPlugins.hyprtasking;
+    plugins = lib.optional hyprtasking pkgs-hyprland.hyprlandPlugins.hyprtasking;
 
     extraConfig = builtins.readFile ./hyprland.conf + lib.optionalString hyprtasking ''
       bind = $mainMod, Tab, hyprtasking:toggle, cursor
