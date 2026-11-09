@@ -43,8 +43,6 @@ in
         theme = "catppuccin-frappe";
     };
 
-    initrd.systemd.enable = true;
-
     consoleLogLevel = 0;
     kernelParams = [ "quiet" "udev.log_level=0" ];
   };

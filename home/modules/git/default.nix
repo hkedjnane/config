@@ -1,9 +1,14 @@
 { lib, pkgs, config, ... }: {
   programs.git = {
-    inherit (config.git) userEmail userName;
     package = pkgs.git;
     enable = true;
-    extraConfig = {
+    lfs.enable = true;
+
+    settings = {
+      user = {
+        name = config.git.userName;
+        email = config.git.userEmail;
+      };
       core = {
         commentChar = "%"; # Because Stockly uses `#` in commits
         excludesfile = "~/.gitignore";
@@ -13,10 +18,8 @@
       push = { autoSetupRemote = true; };
       init = { defaultBranch = "main"; };
       color = { ui = true; };
-    };
-    lfs.enable = true;
 
-    aliases = {
+      alias = {
       a = "add";
       b = "branch";
       c = "commit";
@@ -52,6 +55,7 @@
       wip = "!git add $(Wgit rev-parse --show-toplevel) && git commit -m 'wip'";
       wipp =
         "!git add $(git rev-parse --show-toplevel) && git commit -m 'wip' && git push -u";
+      };
     };
   };
 
