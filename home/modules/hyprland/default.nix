@@ -1,5 +1,9 @@
 { pkgs, lib, config, ... }:
 let
+  # Workspace overview plugin (Super+Tab). Off until hyprtasking builds against
+  # Hyprland 0.57 (its last upstream commit, 2026-09-29, predates that release).
+  hyprtasking = false;
+
   # Fuzzy window picker across all workspaces, most recently focused first.
   # The current window goes last so that Enter jumps back to the previous one.
   window_picker = pkgs.writeShellScript "window_picker.sh" ''
@@ -35,13 +39,12 @@ lib.mkIf (!config.remote) {
   wayland.windowManager.hyprland = {
     enable = true;
     # Workspace overview with live window contents
-    plugins = [ pkgs.hyprlandPlugins.hyprtasking ];
+    plugins = lib.optional hyprtasking pkgs.hyprlandPlugins.hyprtasking;
 
-    extraConfig = builtins.readFile ./hyprland.conf + ''
+    extraConfig = builtins.readFile ./hyprland.conf + lib.optionalString hyprtasking ''
       bind = $mainMod, Tab, hyprtasking:toggle, cursor
       # Non consuming, escape must still reach the focused window
       bindn = , escape, hyprtasking:if_active, hyprtasking:toggle cursor
-      bind = $mainMod SHIFT, Tab, exec, ${window_picker}
 
       plugin {
         hyprtasking {
@@ -62,6 +65,8 @@ lib.mkIf (!config.remote) {
           }
         }
       }
+    '' + ''
+      bind = $mainMod SHIFT, Tab, exec, ${window_picker}
 
       exec-once = awww-daemon
       # Nearest keeps the pixel art sharp
